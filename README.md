@@ -1,7 +1,8 @@
 # ansible-koha
 An Ansible role for installing Koha (the FOSS LMS/ILS) on Debian Wheezy.
 
-(Lengthy) Disclaimer:
+(Lengthy) Disclaimer
+--------------
 
 1) Review this role before you use it! If you don't already know how to
 install and support Koha, don't use it.
@@ -22,3 +23,26 @@ more. Consult the Koha community documentation to make your updates.
 5) There are probably other things to talk about, but hopefully you'll
 read through the role and understand what is happening so I don't
 have to warn you about it.
+
+
+Role Variables
+--------------
+### MySQL
+* ``mysql_passwd_seed``: MySQL root user password (role will fail without this)
+
+Example Playbook
+--------------
+
+    - hosts: koha-servers
+      gather_facts: yes
+      remote_user: root
+      sudo: true
+      roles:
+        - { role: ansible-koha, when: "ansible_os_family == 'Debian'" }
+
+
+Example Run
+--------------
+
+    ansible-playbook koha-site.yml --extra-vars "mysql_passwd_seed=replace_with_root_password"
+
